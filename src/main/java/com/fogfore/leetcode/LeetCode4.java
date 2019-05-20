@@ -1,5 +1,10 @@
 package com.fogfore.leetcode;
 
+/**
+ * 寻找两个有序数组的中位数
+ *
+ * @author fogfore
+ */
 public class LeetCode4 {
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         boolean oddFlag = ((nums1.length + nums2.length) & 1) == 1;
