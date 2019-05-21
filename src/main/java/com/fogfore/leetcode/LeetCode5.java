@@ -1,5 +1,11 @@
 package com.fogfore.leetcode;
 
+/**
+ * 最长回文子串
+ * Manacher（马拉车）算法
+ *
+ * @author fogfore
+ */
 public class LeetCode5 {
     public static String longestPalindrome(String s) {
         if (s == null || s.length() < 1) {
