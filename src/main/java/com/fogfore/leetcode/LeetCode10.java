@@ -7,55 +7,31 @@ package com.fogfore.leetcode;
  * @author fogfore
  */
 public class LeetCode10 {
-    // dp
+    // dp 时空复杂度最优
     public static boolean isMatch(String s, String p) {
-        int sLen = s.length(), pLen = p.length();
-        boolean[][] memory = new boolean[sLen + 1][pLen + 1];
-        memory[0][0] = true;
-        for (int i = 0; i <= sLen; i++) {
-            for (int j = 1; j <= pLen; j++) {
-                if (p.charAt(j - 1) == '*') {
-                    memory[i][j] = memory[i][j - 2] ||
-                            (i > 0 && (s.charAt(i - 1) == p.charAt(j - 2) || p.charAt(j - 2) == '.') && memory[i - 1][j]);
-                } else {
-                    memory[i][j] = i > 0 && (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.')
-                            && memory[i - 1][j - 1];
-                }
+        if (s == null || p == null) {
+            return false;
+        }
+        boolean[][] matches = new boolean[2][p.length() + 1];
+        matches[0][0] = true;
+        for (int i = 1; i < p.length(); i++) {
+            if (p.charAt(i) == '*') {
+                matches[0][i + 1] = matches[0][i - 1];
             }
         }
-        return memory[sLen][pLen];
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = 0; j < p.length(); j++) {
+                if (j > 0 && p.charAt(j) == '*') {
+                    matches[(i + 1) & 1][j + 1] = matches[(i + 1) & 1][j - 1] ||
+                            ((p.charAt(j - 1) == s.charAt(i) || p.charAt(j - 1) == '.') && matches[i & 1][j + 1]);
+                } else {
+                    matches[(i + 1) & 1][j + 1] = (p.charAt(j) == '.' || p.charAt(j) == s.charAt(i)) && matches[i & 1][j];
+                }
+            }
+            matches[0][0] = false;
+        }
+        return matches[s.length() & 1][p.length()];
     }
-    
-    // dp 优化存储
-//    public static boolean isMatch(String s, String p) {
-//        if (s == null || p == null) {
-//            return false;
-//        }
-//        boolean[][] matches = new boolean[2][p.length() + 1];
-//        matches[0][0] = true;
-//        for (int i = 1; i < p.length(); i++) {
-//            if (p.charAt(i) == '*') {
-//                matches[0][i + 1] = matches[0][i - 1];
-//            }
-//        }
-//        for (int i = 0; i < s.length(); i++) {
-//            for (int j = 0; j < p.length(); j++) {
-//                if (j > 0 && p.charAt(j) == '*') {
-//                    if (p.charAt(j - 1) == s.charAt(i) || p.charAt(j - 1) == '.') {
-//                        matches[(i + 1) & 1][j + 1] = matches[i & 1][j + 1] || matches[(i + 1) & 1][j] || matches[(i + 1) & 1][j - 1];
-//                    } else {
-//                        matches[(i + 1) & 1][j + 1] = matches[(i + 1) & 1][j - 1];
-//                    }
-//                } else if (p.charAt(j) == '.' || p.charAt(j) == s.charAt(i)) {
-//                    matches[(i + 1) & 1][j + 1] = matches[i & 1][j];
-//                } else {
-//                    matches[(i + 1) & 1][j + 1] = false;
-//                }
-//            }
-//            matches[0][0] = false;
-//        }
-//        return matches[s.length() & 1][p.length()];
-//    }    
 
     // dfs
 //    public static boolean isMatch(String s, String p) {
@@ -84,11 +60,15 @@ public class LeetCode10 {
 //    }
 
     public static void main(String[] args) {
-        System.out.println(isMatch("mississippi", "mis*is*p*."));
-        System.out.println(isMatch("aab", "c*a*b"));
-        System.out.println(isMatch("ab", ".*"));
-        System.out.println(isMatch("aa", "a*"));
-        System.out.println(isMatch("aa", "a"));
-        System.out.println(isMatch("a", "ab*"));
+        System.out.println("true " + isMatch("ab", ".*"));
+        System.out.println("true " + isMatch("baccbbcbcacacbbc", "c*.*b*c*ba*b*b*.a*"));
+        System.out.println("true " + isMatch("aab", "c*a*b"));
+        System.out.println("false " + isMatch("abcd", "d*"));
+        System.out.println("false " + isMatch("mississippi", "mis*is*p*."));
+        System.out.println("true " + isMatch("aa", "a*"));
+        System.out.println("false " + isMatch("aa", "a"));
+        System.out.println("true " + isMatch("a", "ab*"));
+        System.out.println("true " + isMatch("", ".*"));
+        System.out.println("true " + isMatch("", "a*"));
     }
 }
