@@ -25,6 +25,37 @@ public class LeetCode10 {
         }
         return memory[sLen][pLen];
     }
+    
+    // dp 优化存储
+//    public static boolean isMatch(String s, String p) {
+//        if (s == null || p == null) {
+//            return false;
+//        }
+//        boolean[][] matches = new boolean[2][p.length() + 1];
+//        matches[0][0] = true;
+//        for (int i = 1; i < p.length(); i++) {
+//            if (p.charAt(i) == '*') {
+//                matches[0][i + 1] = matches[0][i - 1];
+//            }
+//        }
+//        for (int i = 0; i < s.length(); i++) {
+//            for (int j = 0; j < p.length(); j++) {
+//                if (j > 0 && p.charAt(j) == '*') {
+//                    if (p.charAt(j - 1) == s.charAt(i) || p.charAt(j - 1) == '.') {
+//                        matches[(i + 1) & 1][j + 1] = matches[i & 1][j + 1] || matches[(i + 1) & 1][j] || matches[(i + 1) & 1][j - 1];
+//                    } else {
+//                        matches[(i + 1) & 1][j + 1] = matches[(i + 1) & 1][j - 1];
+//                    }
+//                } else if (p.charAt(j) == '.' || p.charAt(j) == s.charAt(i)) {
+//                    matches[(i + 1) & 1][j + 1] = matches[i & 1][j];
+//                } else {
+//                    matches[(i + 1) & 1][j + 1] = false;
+//                }
+//            }
+//            matches[0][0] = false;
+//        }
+//        return matches[s.length() & 1][p.length()];
+//    }    
 
     // dfs
 //    public static boolean isMatch(String s, String p) {
