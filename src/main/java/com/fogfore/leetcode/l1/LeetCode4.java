@@ -1,4 +1,4 @@
-package com.fogfore.leetcode;
+package com.fogfore.leetcode.l1;
 
 /**
  * 寻找两个有序数组的中位数

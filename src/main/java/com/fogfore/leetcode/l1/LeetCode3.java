@@ -1,4 +1,4 @@
-package com.fogfore.leetcode;
+package com.fogfore.leetcode.l1;
 
 /**
  * 无重复最长字串

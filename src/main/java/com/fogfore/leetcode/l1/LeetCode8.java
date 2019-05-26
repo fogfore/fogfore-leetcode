@@ -1,4 +1,4 @@
-package com.fogfore.leetcode;
+package com.fogfore.leetcode.l1;
 
 /**
  * 字符串转换整数 (atoi)

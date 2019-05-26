@@ -1,4 +1,6 @@
-package com.fogfore.leetcode;
+package com.fogfore.leetcode.l1;
+
+import com.fogfore.leetcode.l1.ListNode;
 
 /**
  * 合并两个有序链表

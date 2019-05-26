@@ -1,6 +1,6 @@
-package com.fogfore.leetcode;
+package com.fogfore.leetcode.l1;
 
-import java.util.List;
+import com.fogfore.leetcode.l1.ListNode;
 
 /**
  * 删除链表的倒数第N个节点

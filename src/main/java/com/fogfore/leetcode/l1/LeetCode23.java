@@ -1,10 +1,9 @@
-package com.fogfore.leetcode;
+package com.fogfore.leetcode.l1;
 
-import java.util.Arrays;
+import com.fogfore.leetcode.l1.ListNode;
+
 import java.util.Comparator;
-import java.util.List;
 import java.util.PriorityQueue;
-import java.util.stream.Collectors;
 
 /**
  * 合并K个排序链表
