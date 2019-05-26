@@ -1,5 +1,7 @@
 package com.fogfore.leetcode.l1;
 
+import com.fogfore.algorithm.utils.ListNode;
+
 /**
  * 两数相加
  *
@@ -38,22 +40,5 @@ public class LeetCode2 {
         l2 = l2.next;
         l2.next = new ListNode(4);
         System.out.println(addTwoNumbers(t1, t2));
-    }
-}
-
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
-
-    @Override
-    public String toString() {
-        return "ListNode{" +
-                "val=" + val +
-                ", next=" + next +
-                '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.fogfore.leetcode.l1;
 
-import com.fogfore.leetcode.l1.ListNode;
+import com.fogfore.algorithm.utils.ListNode;
 
 /**
  * 删除链表的倒数第N个节点

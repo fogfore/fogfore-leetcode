@@ -1,6 +1,6 @@
 package com.fogfore.leetcode.l1;
 
-import com.fogfore.leetcode.l1.ListNode;
+import com.fogfore.algorithm.utils.ListNode;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
