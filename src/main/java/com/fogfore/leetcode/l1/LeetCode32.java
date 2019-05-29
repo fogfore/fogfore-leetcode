@@ -1,4 +1,4 @@
-package com.fogfore.leetcode;
+package com.fogfore.leetcode.l1;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -11,11 +11,52 @@ import java.util.LinkedList;
  * @author fogfore
  */
 public class LeetCode32 {
-    // 动态规划
     public static int longestValidParentheses(String s) {
-
-        return 0;
+        int left = 0, right = 0, maxlength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (left == right) {
+                maxlength = Math.max(maxlength, 2 * right);
+            } else if (right >= left) {
+                left = right = 0;
+            }
+        }
+        left = right = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (left == right) {
+                maxlength = Math.max(maxlength, 2 * left);
+            } else if (left >= right) {
+                left = right = 0;
+            }
+        }
+        return maxlength;
     }
+
+    // 动态规划
+//    public static int longestValidParentheses(String s) {
+//        int[] cache = new int[s.length() + 1];
+//        int max = 0;
+//        for (int i = 1; i < s.length(); i++) {
+//            if (s.charAt(i) == ')') {
+//                if (s.charAt(i - 1) == '(') {
+//                    cache[i + 1] = cache[i - 1] + 2;
+//                } else if (i - cache[i] - 1 >= 0 && s.charAt(i - cache[i] - 1) == '(') {
+//                    cache[i + 1] = cache[i] + cache[i - cache[i] - 1] + 2;
+//                }
+//            }
+//            max = Math.max(max, cache[i + 1]);
+//        }
+//        return max;
+//    }
 
     // 栈
 //    public static int longestValidParentheses(String s) {
@@ -31,53 +72,6 @@ public class LeetCode32 {
 //            }
 //        }
 //        return res;
-//    }
-
-//    public static int longestValidParentheses(String s) {
-//        Deque<Character> charStack = new ArrayDeque<>();
-//        Deque<Integer> numStack = new LinkedList<>();
-//        for (int i = 0; i < s.length(); i++) {
-//            if (charStack.isEmpty() || charStack.peekFirst() != '(' || s.charAt(i) != ')') {
-//                charStack.addFirst(s.charAt(i));
-//                numStack.addFirst(0);
-//            } else {
-//                charStack.removeFirst();
-//                numStack.addFirst(numStack.getFirst() + 1);
-//            }
-//        }
-//        int count = 0;
-//        int tmpCount = 0;
-//        int num;
-//        int zeroNum;
-//        int nonZeroNum;
-//        Iterator<Integer> iterator;
-//        while (!numStack.isEmpty()) {
-//            if (numStack.peekFirst() == 0) {
-//                numStack.removeFirst();
-//                count = tmpCount > count ? tmpCount : count;
-//                tmpCount = 0;
-//                continue;
-//            }
-//            num = numStack.peekFirst();
-//            tmpCount += num;
-//            zeroNum = num;
-//            nonZeroNum = num;
-//            iterator = numStack.iterator();
-//            while (iterator.hasNext()) {
-//                num = iterator.next();
-//                if (zeroNum > 0 && num == 0) {
-//                    iterator.remove();
-//                    zeroNum--;
-//                } else if (nonZeroNum > 0 && num > 0) {
-//                    iterator.remove();
-//                    nonZeroNum--;
-//                } else if (zeroNum <= 0 && nonZeroNum <= 0) {
-//                    break;
-//                }
-//            }
-//        }
-//        count = tmpCount > count ? tmpCount : count;
-//        return count << 1;
 //    }
 
     public static void main(String[] args) {

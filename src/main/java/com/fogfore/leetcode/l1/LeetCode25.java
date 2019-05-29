@@ -1,4 +1,4 @@
-package com.fogfore.leetcode;
+package com.fogfore.leetcode.l1;
 
 import com.fogfore.algorithm.utils.ListFactory;
 import com.fogfore.algorithm.utils.ListNode;
