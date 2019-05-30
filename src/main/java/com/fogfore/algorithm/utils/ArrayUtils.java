@@ -17,4 +17,20 @@ public class ArrayUtils {
         }
         return joiner.toString();
     }
+
+    public static String toString(char[][] matrix) {
+        StringJoiner joiner = new StringJoiner(",\n ", "{", "}");
+        for (int i = 0; i < matrix.length; i++) {
+            joiner.add(Arrays.toString(matrix[i]));
+        }
+        return joiner.toString();
+    }
+
+    public static <T> String toString(T[][] matrix) {
+        StringJoiner joiner = new StringJoiner(",\n ", "{", "}");
+        for (int i = 0; i < matrix.length; i++) {
+            joiner.add(Arrays.toString(matrix[i]));
+        }
+        return joiner.toString();
+    }
 }
