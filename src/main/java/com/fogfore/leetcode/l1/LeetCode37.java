@@ -4,6 +4,7 @@ import com.fogfore.algorithm.utils.ArrayUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 解数独
@@ -35,42 +36,42 @@ public class LeetCode37 {
                 }
             }
         }
-        int lastCount = count;
-        int num = -1;
-        while (true) {
-            for (int i = 0; i < 9; i++) {
-                next:
-                for (int j = 0; j < 9; j++) {
-                    if (board[i][j] != '.') {
-                        continue;
-                    }
-                    for (int n = 1; n <= 9; n++) {
-                        if (rowSet[i].contains((char) (n + '0')) && colSet[j].contains((char) (n + '0')) && cellSet[i / 3 * 3 + j / 3].contains((char) (n + '0'))) {
-                            if (num == -1) {
-                                num = n;
-                            } else {
-                                num = -1;
-                                continue next;
-                            }
-                        }
-                    }
-                    if (num == -1) {
-                        continue;
-                    }
-                    board[i][j] = (char) (num + '0');
-                    rowSet[i].remove((char) (num + '0'));
-                    colSet[j].remove((char) (num + '0'));
-                    cellSet[i / 3 * 3 + j / 3].remove((char) (num + '0'));
-                    num = -1;
-                    count--;
-                }
-            }
-            if (count == lastCount) {
-                break;
+        fill(board, rowSet, colSet, cellSet, 0, 0);
+    }
+
+    private static boolean fill(char[][] board, Set<Character>[] rowSet, Set<Character>[] colSet, Set<Character>[] cellSet, int i, int j) {
+        if (i >= 9) {
+            return true;
+        }
+        if (board[i][j] != '.') {
+            i = j == 8 ? i + 1 : i;
+            j = (j + 1) % 9;
+            return fill(board, rowSet, colSet, cellSet, i, j);
+        }
+
+        HashSet<Character> intersection = new HashSet<>(rowSet[i]);
+        intersection.retainAll(colSet[j]);
+        intersection.retainAll(cellSet[i / 3 * 3 + j / 3]);
+        if (intersection.isEmpty()) {
+            return false;
+        }
+        int ti, tj;
+        for (Character ch : intersection) {
+            rowSet[i].remove(ch);
+            cellSet[i / 3 * 3 + j / 3].remove(ch);
+            colSet[j].remove(ch);
+            ti = i + (j + 1) / 9;
+            tj = (j + 1) % 9;
+            if (fill(board, rowSet, colSet, cellSet, ti, tj)) {
+                board[i][j] = ch;
+                return true;
             } else {
-                lastCount = count;
+                rowSet[i].add(ch);
+                colSet[j].add(ch);
+                cellSet[i / 3 * 3 + j / 3].add(ch);
             }
         }
+        return false;
     }
 
     public static void main(String[] args) {
