@@ -1,9 +1,6 @@
 package com.fogfore.leetcode.l1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 组合总和
@@ -12,27 +9,28 @@ import java.util.List;
  */
 public class LeetCode39 {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        int pre = 0, next = 0;
-        int sum = 0;
-        Arrays.sort(candidates);
-        List<List<Integer>> res = new ArrayList<>();
-        while (next < candidates.length && pre <= next && candidates[pre] <= target) {
-            sum += candidates[next];
-            if (sum == target) {
-                List<Integer> temp = new ArrayList<>();
-                for (int i = pre; i <= next; i++) {
-                    temp.add(candidates[i]);
-                }
-                res.add(temp);
-                next++;
-            } else if (sum > target) {
-                sum -= candidates[pre];
-                pre++;
-            } else {
-                next++;
-            }
+
+
+        return null;
+    }
+
+    private void cal(int[] candidates, int target, int cur, int sum, LinkedList<Integer> queue, List<List<Integer>> res) {
+        if (cur >= candidates.length) {
+            return;
         }
-        return res;
+        sum += candidates[cur];
+        queue.add(candidates[cur]);
+        while (sum < target) {
+            cal(candidates, target, cur + 1, sum, queue, res);
+            sum += candidates[cur];
+            queue.add(candidates[cur]);
+        }
+        if (sum == target) {
+            res.add(new LinkedList<>(queue));
+        }
+        while (!queue.isEmpty() && queue.peek() == candidates[cur]) {
+            queue.remove();
+        }
     }
 
     public static void main(String[] args) {
