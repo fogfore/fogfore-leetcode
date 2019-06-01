@@ -33,8 +33,6 @@ public class LeetCode39 {
         }
     }
 
-    // 动态规划 完全背包问题
-
     public static void main(String[] args) {
         LeetCode39 leetCode39 = new LeetCode39();
         System.out.println(leetCode39.combinationSum(new int[]{2, 3, 5}, 7));
