@@ -1,7 +1,5 @@
 package com.fogfore.leetcode.l1;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * Pow(x, n)
@@ -18,7 +16,7 @@ public class LeetCode50 {
             x = 1 / x;
             n = -n;
         }
-        double res = myPow(x, n / 2);
+        double res = myPow(x, n >> 1);
         return (n & 1) == 1 ? res * res * x : res * res;
     }
 
