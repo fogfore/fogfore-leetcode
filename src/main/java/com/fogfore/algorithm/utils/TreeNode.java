@@ -1,18 +1,19 @@
 package com.fogfore.algorithm.utils;
 
+
 public class TreeNode {
-    public int value;
+    public int val;
     public TreeNode left;
     public TreeNode right;
 
-    public TreeNode(int value) {
-        this.value = value;
+    TreeNode(int x) {
+        val = x;
     }
 
     @Override
     public String toString() {
         return "TreeNode{" +
-                "value=" + value +
+                "val=" + val +
                 ", left=" + left +
                 ", right=" + right +
                 '}';
