@@ -1,6 +1,5 @@
 package com.fogfore.leetcode.l2;
 
-import com.fogfore.algorithm.utils.ListNode;
 import com.fogfore.algorithm.utils.TreeNode;
 
 import java.util.ArrayList;
@@ -13,9 +12,12 @@ import java.util.List;
  * @author fogfore
  */
 public class LeetCode94 {
+//    List<Integer> res = new ArrayList<>();
+
+    // 迭代
     public List<Integer> inorderTraversal(TreeNode root) {
-        if (root == null) return null;
         List<Integer> res = new ArrayList<>();
+        if (root == null) return res;
         LinkedList<TreeNode> stack = new LinkedList<>();
         stack.addFirst(root);
         TreeNode node;
@@ -25,12 +27,30 @@ public class LeetCode94 {
                 stack.addFirst(node.left);
                 node = node.left;
             }
-            res.add(node.val);
-            stack.removeFirst();
-            if (node.right != null) {
-                stack.addFirst(node);
+            while (!stack.isEmpty()) {
+                node = stack.peekFirst();
+                stack.removeFirst();
+                res.add(node.val);
+                if (node.right != null) {
+                    stack.addFirst(node.right);
+                    break;
+                }
             }
         }
-        return null;
+        return res;
+    }
+
+    // 递归
+//    public List<Integer> inorderTraversal(TreeNode root) {
+//        if (root != null) {
+//            inorderTraversal(root.left);
+//            res.add(root.val);
+//            inorderTraversal(root.right);
+//        }
+//        return res;
+//    }
+
+    public static void main(String[] args) {
+
     }
 }
