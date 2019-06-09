@@ -24,13 +24,17 @@ public class TreeUtils {
         fillByInOrder(root.right, values);
     }
 
+    /**
+     * 二叉树的最大深度
+     *
+     * @param root 根节点
+     * @return 二叉树的最大深度
+     */
     public static int getDepth(TreeNode root) {
         if (ObjectUtils.isEmpty(root)) {
             return 0;
         }
-        int leftDepth = getDepth(root.left);
-        int rightDepth = getDepth(root.right);
-        return leftDepth > rightDepth ? rightDepth + 1 : rightDepth + 1;
+        return Math.max(getDepth(root.left), getDepth(root.right)) + 1;
     }
 
     public static boolean isBalanced(TreeNode root) {
