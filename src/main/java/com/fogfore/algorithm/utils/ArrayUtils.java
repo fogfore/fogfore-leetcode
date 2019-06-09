@@ -33,4 +33,13 @@ public class ArrayUtils {
         }
         return joiner.toString();
     }
+
+    public static void swap(int[] array, int src, int dest) {
+        if (src == dest) {
+            return;
+        }
+        array[src] = array[src] ^ array[dest];
+        array[dest] = array[src] ^ array[dest];
+        array[src] = array[src] ^ array[dest];
+    }
 }

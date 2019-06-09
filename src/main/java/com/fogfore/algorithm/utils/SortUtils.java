@@ -41,7 +41,7 @@ public class SortUtils {
     public static void heapSort(int[] array) {
         buildMaxHeap(array, array.length);
         for (int i = array.length - 1; i > 0; i--) {
-            swap(array, 0, i);
+            ArrayUtils.swap(array, 0, i);
             adjustMaxHeap(array, 0, i);
         }
     }
@@ -162,7 +162,7 @@ public class SortUtils {
         }
         if (isRandom) {
             int index = RANDOM.nextInt(low, high + 1);
-            swap(array, index, high);
+            ArrayUtils.swap(array, index, high);
         }
         int small = low - 1;
         int temp = array[high];
@@ -170,21 +170,12 @@ public class SortUtils {
             if (array[i] < temp) {
                 small++;
                 if (small != i) {
-                    swap(array, small, i);
+                    ArrayUtils.swap(array, small, i);
                 }
             }
         }
         small++;
-        swap(array, small, high);
+        ArrayUtils.swap(array, small, high);
         return small;
-    }
-
-    private static void swap(int[] array, int src, int dest) {
-        if (src == dest) {
-            return;
-        }
-        array[src] = array[src] ^ array[dest];
-        array[dest] = array[src] ^ array[dest];
-        array[src] = array[src] ^ array[dest];
     }
 }
