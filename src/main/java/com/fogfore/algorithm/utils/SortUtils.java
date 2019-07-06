@@ -164,17 +164,13 @@ public class SortUtils {
             int index = RANDOM.nextInt(low, high + 1);
             ArrayUtils.swap(array, index, high);
         }
-        int small = low - 1;
-        int temp = array[high];
+        int small = low;
         for (int i = low; i < high; i++) {
-            if (array[i] < temp) {
+            if (array[i] < array[high]) {
+                ArrayUtils.swap(array, small, i);
                 small++;
-                if (small != i) {
-                    ArrayUtils.swap(array, small, i);
-                }
             }
         }
-        small++;
         ArrayUtils.swap(array, small, high);
         return small;
     }
