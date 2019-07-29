@@ -53,4 +53,33 @@ public class TreeFactory {
     public static TreeNode getBalancedBinaryTree(int nodeNum, int minValue, int maxValue) {
         return null;
     }
+
+    public static TreeNode buildTree(Integer[] array) {
+        if (array == null || array.length < 1 || array[0] == null) return null;
+        LinkedList<TreeNode> list = new LinkedList<>();
+        TreeNode root = new TreeNode(array[0]);
+        list.addLast(root);
+        int ops = 1;
+        while (ops < array.length) {
+            TreeNode n = list.removeFirst();
+            if (array[ops] == null) {
+                n.left = null;
+            } else {
+                n.left = new TreeNode(array[ops]);
+                list.addLast(n.left);
+            }
+            ops++;
+            if (ops >= array.length) {
+                break;
+            }
+            if (array[ops] == null) {
+                n.right = null;
+            } else {
+                n.right = new TreeNode(array[ops]);
+                list.addLast(n.right);
+            }
+            ops++;
+        }
+        return root;
+    }
 }
