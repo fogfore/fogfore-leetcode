@@ -62,9 +62,7 @@ public class TreeFactory {
         int ops = 1;
         while (ops < array.length) {
             TreeNode n = list.removeFirst();
-            if (array[ops] == null) {
-                n.left = null;
-            } else {
+            if (array[ops] != null) {
                 n.left = new TreeNode(array[ops]);
                 list.addLast(n.left);
             }
@@ -72,9 +70,7 @@ public class TreeFactory {
             if (ops >= array.length) {
                 break;
             }
-            if (array[ops] == null) {
-                n.right = null;
-            } else {
+            if (array[ops] != null) {
                 n.right = new TreeNode(array[ops]);
                 list.addLast(n.right);
             }
